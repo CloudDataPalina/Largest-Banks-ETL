@@ -83,6 +83,10 @@ Using **matplotlib**, the project generates charts for quick analysis:
 - Clear market dominance by a few global players
 - The difference in capitalization between top banks is substantial
 - Visual representation makes it easier to compare values across currencies
+- The largest bank by market capitalization is **JPMorgan Chase** — over **$430 billion**
+- The Top 5 are mostly **American** and **Chinese** banks, showing U.S. and Chinese dominance in global banking
+- **European** and **Indian** banks are rare in the top ranks — usually only 1–2 positions
+- Currency conversion (USD, EUR, GBP) does not change the ranking order, indicating stable relative positions
 
 ---
 
