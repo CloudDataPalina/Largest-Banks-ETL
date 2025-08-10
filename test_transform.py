@@ -1,46 +1,49 @@
-# Импорт библиотеки pandas для работы с таблицами
+# Import pandas library for working with tables
 import pandas as pd
 
-# Определяем функцию-тест для проверки работы функции transform()
+# Define a test function to verify the behavior of the transform() function
 def test_transform():
     '''
-    Тест проверяет корректность функции transform() 
-    при использовании тестового DataFrame и фиктивных валютных курсов.
+    This test verifies the correctness of the transform() function
+    using a sample DataFrame and mock currency exchange rates.
     '''
 
-    # Создаём тестовый DataFrame с двумя банками и их рыночной капитализацией в миллиардах USD
+    # Create a test DataFrame with two banks and their market capitalization in billions of USD
     test_df = pd.DataFrame({
         'Name': ['Bank A', 'Bank B'],
-        'MC_USD_Billion': [100, 200]                # рыночная капитализация в долларах
+        'MC_USD_Billion': [100, 200]  # market capitalization in USD
     })
 
-    # Задаём фиктивные курсы валют (как будто они прочитаны из CSV-файла)
+    # Define mock exchange rates (as if they were read from a CSV file)
     test_exchange = {
-        'EUR': 0.9,                                # курс EUR к USD
-        'GBP': 0.8,                                # курс GBP к USD
-        'INR': 83.0                                # курс индийской рупии к USD
+        'EUR': 0.9,   # EUR to USD exchange rate
+        'GBP': 0.8,   # GBP to USD exchange rate
+        'INR': 83.0   # INR to USD exchange rate
     }
 
-    # Эмуляция работы функции transform() — преобразуем данные
+    # Simulate the transform() function — transform the data
     def transform_test(df):
-        # Добавляем столбец с капитализацией в EUR
-        df['MC_EUR_Billion'] = df['MC_USD_Billion'] * test_exchange['EUR']       # Добавляем столбец с капитализацией в GBP
-        df['MC_GBP_Billion'] = df['MC_USD_Billion'] * test_exchange['GBP']       # Добавляем столбец с капитализацией в INR
-        df['MC_INR_Billion'] = df['MC_USD_Billion'] * test_exchange['INR']       # Округляем все числовые значения до двух знаков после запятой
+        # Add a column for market cap in EUR
+        df['MC_EUR_Billion'] = df['MC_USD_Billion'] * test_exchange['EUR']
+        # Add a column for market cap in GBP
+        df['MC_GBP_Billion'] = df['MC_USD_Billion'] * test_exchange['GBP']
+        # Add a column for market cap in INR
+        df['MC_INR_Billion'] = df['MC_USD_Billion'] * test_exchange['INR']
+        # Round all numeric values to two decimal places
         df = df.round(2)
         return df
 
-    # Вызываем трансформацию и получаем результат
+    # Run the transformation and get the result
     result_df = transform_test(test_df)
 
-    # Проверяем правильность расчётов через утверждения (assert)
-    assert result_df.loc[0, 'MC_EUR_Billion'] == 90.00                 # 100 USD × 0.9 = 90.00
-    assert result_df.loc[1, 'MC_GBP_Billion'] == 160.00                # 200 USD × 0.8 = 160.00 
-    assert result_df.loc[0, 'MC_INR_Billion'] == 8300.00               # 100 USD × 83 = 8300.00
+    # Validate the calculations using assertions
+    assert result_df.loc[0, 'MC_EUR_Billion'] == 90.00     # 100 USD × 0.9 = 90.00
+    assert result_df.loc[1, 'MC_GBP_Billion'] == 160.00    # 200 USD × 0.8 = 160.00
+    assert result_df.loc[0, 'MC_INR_Billion'] == 8300.00   # 100 USD × 83 = 8300.00
 
-    # Если все assert'ы прошли — выводим сообщение
-    print(" Тест пройден успешно.")
+    # If all assertions pass — print a success message
+    print("Test passed successfully.")
 
-# Этот блок выполняется только если запустить файл напрямую
+# This block runs only if the file is executed directly
 if __name__ == "__main__":
-    test_transform()                                 # Запускаем тест
+    test_transform()  # Run the test
